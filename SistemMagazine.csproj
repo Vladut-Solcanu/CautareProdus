@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="LogicaMagazine\**" />
+    <Compile Remove="ModeleMagazin\**" />
+    <EmbeddedResource Remove="LogicaMagazine\**" />
+    <EmbeddedResource Remove="ModeleMagazin\**" />
+    <None Remove="LogicaMagazine\**" />
+    <None Remove="ModeleMagazin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="LogicaMagazine\LogicaMagazine.csproj" />
+    <ProjectReference Include="ModeleMagazin\ModeleMagazin.csproj" />
+  </ItemGroup>
+
+</Project>
