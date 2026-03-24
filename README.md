@@ -28,10 +28,3 @@ Soluția este împărțită în 3 proiecte distincte pentru o mentenanță și o
 * **`LogicaMagazine` (Class Library):** Reprezintă stratul de manipulare a datelor. Aici este gestionată colecția generică de date în memorie (`List<LocatieProdus>`) și tot aici se află logica de căutare (extensiile `.Where()` din LINQ).
 * **`CautareProdus` (Console App):** Este punctul de intrare în aplicație (`Program.cs`). Gestionează interacțiunea cu utilizatorul (UI), citește datele de la tastatură și afișează rezultatele.
 
-## 🛠️ Tehnologii și Concepte Utilizate
-* Limbaj: **C# 12 / .NET 8.0**
-* **Colecții Generice** (`List<T>`) pentru stocarea datelor în memorie.
-* **LINQ** (Language Integrated Query) pentru interogarea colecțiilor.
-* **Tipuri Valoare:** `enum` simplu și `enum` cu atributul bitwise `[Flags]`.
-* **Tratarea Excepțiilor:** `try-catch` pentru controlul fluxului de erori.
-* **Controlul Versiunii:** Git & GitHub.
