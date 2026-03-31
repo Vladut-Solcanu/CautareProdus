@@ -21,7 +21,7 @@ namespace CautareProdus
             while (true)
             {
                 Console.WriteLine("\n=== MENIU PRINCIPAL (SALVARE IN FISIERE) ===");
-                Console.WriteLine("1. Adauga un PRODUS nou");
+                Console.WriteLine("1. Adauga un PRODUS nou (cu alocare la magazin)");
                 Console.WriteLine("2. Afiseaza toate produsele");
                 Console.WriteLine("3. Adauga un MAGAZIN nou");
                 Console.WriteLine("4. Afiseaza toate magazinele");
@@ -35,7 +35,8 @@ namespace CautareProdus
                 switch (optiune)
                 {
                     case "1":
-                        AdaugaProdus(adminProduse);
+                        
+                        AdaugaProdus(adminProduse, adminMagazine);
                         break;
                     case "2":
                         AfiseazaProduse(adminProduse.GetProduse());
@@ -69,12 +70,26 @@ namespace CautareProdus
             }
         }
 
-        static void AdaugaProdus(IStocareProduse admin)
+        
+        static void AdaugaProdus(IStocareProduse adminP, IStocareMagazine adminM)
         {
             try
             {
                 Console.Write("ID Produs (numar): ");
                 int id = int.Parse(Console.ReadLine());
+
+               
+                Console.WriteLine("\n--- Magazine disponibile pentru alocare ---");
+                var listaMagazine = adminM.GetMagazine();
+                if (listaMagazine.Count == 0)
+                {
+                    Console.WriteLine("ATENTIE: Nu exista magazine salvate! Te rog sa adaugi intai un magazin (Optiunea 3).");
+                    return; 
+                }
+
+                AfiseazaMagazine(listaMagazine);
+                Console.Write("Introdu ID-ul Magazinului in care se afla produsul: ");
+                int magazinId = int.Parse(Console.ReadLine());
 
                 Console.Write("Nume Produs: ");
                 string nume = Console.ReadLine();
@@ -89,14 +104,15 @@ namespace CautareProdus
                 Console.Write("Raft (numar): ");
                 int raft = int.Parse(Console.ReadLine());
 
-                Produs produsNou = new Produs(id, nume, cat, culoar, raft);
-                admin.AddProdus(produsNou);
+                
+                Produs produsNou = new Produs(id, magazinId, nume, cat, culoar, raft);
+                adminP.AddProdus(produsNou);
 
                 Console.WriteLine("Produs salvat cu succes in fisierul Produse.txt!");
             }
             catch (FormatException)
             {
-                Console.WriteLine("Eroare: Trebuie sa introduci numere pentru ID, Culoar si Raft!");
+                Console.WriteLine("Eroare: Trebuie sa introduci numere pentru ID-uri, Culoar si Raft!");
             }
         }
 
