@@ -2,7 +2,7 @@
 
 namespace ModeleMagazin
 {
-    // Enum simplu pentru raion/categorie
+ 
     public enum CategorieProdus
     {
         Lactate = 1,
@@ -11,7 +11,7 @@ namespace ModeleMagazin
         Ingrijire = 4
     }
 
-    // Enum cu [Flags] pentru caracteristicile produsului la raft
+    
     [Flags]
     public enum EticheteProdus
     {

@@ -3,7 +3,7 @@ using ModeleMagazin;
 
 namespace LogicaMagazine
 {
-    // Interfata pentru Produse
+   
     public interface IStocareProduse
     {
         void AddProdus(Produs p);
@@ -11,7 +11,7 @@ namespace LogicaMagazine
         void UpdateProdus(Produs produsActualizat);
     }
 
-    // Interfata pentru Magazine
+
     public interface IStocareMagazine
     {
         void AddMagazin(Magazin m);

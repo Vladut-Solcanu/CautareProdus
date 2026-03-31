@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq; // Folosit pentru cautarea cu LINQ
+using System.Linq; 
 using ModeleMagazin;
 using LogicaMagazine;
 
@@ -10,11 +10,11 @@ namespace CautareProdus
     {
         static void Main()
         {
-            // Instantiem clasele care se ocupa cu salvarea in fisiere pe hard disk
+            
             string caleProduse = "Produse.txt";
             string caleMagazine = "Magazine.txt";
 
-            // Folosim interfețele create conform laboratorului 5
+            
             IStocareProduse adminProduse = new AdministrareProduseFisier(caleProduse);
             IStocareMagazine adminMagazine = new AdministrareMagazineFisier(caleMagazine);
 
@@ -50,7 +50,7 @@ namespace CautareProdus
                         Console.Write("Introdu numele produsului cautat: ");
                         string cautare = Console.ReadLine();
 
-                        // Cerinta Lab: Folosim extensia LINQ (.Where) pentru filtrare rapida
+                        
                         var rezultate = adminProduse.GetProduse()
                             .Where(p => p.Nume.ToLower().Contains(cautare.ToLower()))
                             .ToList();
@@ -107,7 +107,7 @@ namespace CautareProdus
                 Console.Write("Introdu ID-ul produsului pe care vrei sa il muti: ");
                 int idCautat = int.Parse(Console.ReadLine());
 
-                // Folosim LINQ (.FirstOrDefault) pentru a gasi rapid produsul dupa ID
+                
                 var produs = admin.GetProduse().FirstOrDefault(p => p.Id == idCautat);
 
                 if (produs != null)

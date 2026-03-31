@@ -17,7 +17,6 @@ namespace ModeleMagazin
             Id = id; Nume = nume; Categorie = categorie; Culoar = culoar; Raft = raft;
         }
 
-        // Constructor pentru citirea din fisier text
         public Produs(string linieFisier)
         {
             string[] date = linieFisier.Split(SEPARATOR);
@@ -28,7 +27,7 @@ namespace ModeleMagazin
             Raft = int.Parse(date[4]);
         }
 
-        // Metoda pentru salvarea in fisier text
+        
         public string ConversieLaSirPentruFisier()
         {
             return $"{Id}{SEPARATOR}{Nume}{SEPARATOR}{(int)Categorie}{SEPARATOR}{Culoar}{SEPARATOR}{Raft}";
