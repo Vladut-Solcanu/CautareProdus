@@ -30,6 +30,10 @@ namespace ModeleMagazin
             Raft = int.Parse(date[5]);
         }
 
+        public Produs()
+        {
+        }
+
         public string ConversieLaSirPentruFisier()
         {
            
