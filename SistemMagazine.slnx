@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="../AplicatieMagazin/AplicatieMagazin.csproj" Id="4641f508-9edc-4cba-ab36-830a4b93a11c" />
+  <Project Path="AplicatieMagazin/AplicatieMagazin.csproj" />
   <Project Path="LogicaMagazine/LogicaMagazine.csproj" />
   <Project Path="ModeleMagazin/ModeleMagazin.csproj" />
   <Project Path="SistemMagazine.csproj" />
