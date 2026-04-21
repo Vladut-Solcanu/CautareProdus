@@ -8,10 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AplicatieMagazin\**" />
     <Compile Remove="LogicaMagazine\**" />
     <Compile Remove="ModeleMagazin\**" />
+    <EmbeddedResource Remove="AplicatieMagazin\**" />
     <EmbeddedResource Remove="LogicaMagazine\**" />
     <EmbeddedResource Remove="ModeleMagazin\**" />
+    <None Remove="AplicatieMagazin\**" />
     <None Remove="LogicaMagazine\**" />
     <None Remove="ModeleMagazin\**" />
   </ItemGroup>
