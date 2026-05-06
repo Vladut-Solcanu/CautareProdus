@@ -196,6 +196,7 @@ namespace AplicatieMagazin
                 return;
             }
 
+            #modifica (acum iti preia toata lista si abia apoi verifica ce e bun)
             var toateProdusele = adminProduse.GetProduse();
             bool gasit = false;
 
