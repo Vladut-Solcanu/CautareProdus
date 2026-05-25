@@ -27,7 +27,11 @@ namespace LogicaMagazine
             }
         }
 
-        
+        public void DeleteMagazin(Magazin m)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Magazin> GetMagazine()
         {
             List<Magazin> magazine = new List<Magazin>();
@@ -45,6 +49,11 @@ namespace LogicaMagazine
             }
 
             return magazine;
+        }
+
+        public void UpdateMagazin(Magazin m)
+        {
+            throw new NotImplementedException();
         }
     }
 }

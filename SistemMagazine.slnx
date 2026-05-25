@@ -2,5 +2,4 @@
   <Project Path="AplicatieMagazin/AplicatieMagazin.csproj" />
   <Project Path="LogicaMagazine/LogicaMagazine.csproj" />
   <Project Path="ModeleMagazin/ModeleMagazin.csproj" />
-  <Project Path="SistemMagazine.csproj" />
 </Solution>

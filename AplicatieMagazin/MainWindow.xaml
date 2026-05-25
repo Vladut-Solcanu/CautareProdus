@@ -1,47 +1,8 @@
 ﻿<Window x:Class="AplicatieMagazin.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Sistem Gestiune Magazin v5.0" Height="700" Width="800"
-        Background="Green" MinWidth="650" MinHeight="600">
-
-    <Window.Resources>
-        <Style TargetType="Label">
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Margin" Value="0,5,0,2"/>
-        </Style>
-
-        <Style TargetType="TextBox">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="5,0"/>
-            <Setter Property="Margin" Value="0,0,0,5"/>
-            <Setter Property="BorderBrush" Value="#BDC3C7"/>
-        </Style>
-
-        <Style TargetType="ComboBox">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,0,0,5"/>
-        </Style>
-
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Margin" Value="0,15,0,10"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="5" 
-                                BorderThickness="0">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
+        Title="Sistem Gestiune Magazin - Căutare" Height="550" Width="750"
+        Background="Green" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -50,104 +11,79 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0" Background="White" Padding="5">
-            <MenuItem Header="_Fișier">
-                <MenuItem Header="_Resetează Formular" Click="OnResetClick"/>
+            <MenuItem Header="_Căutare">
+                <MenuItem Header="_Resetează Căutarea" Click="OnResetClick"/>
                 <Separator />
-                <MenuItem Header="_Ieșire" Click="OnExitClick"/>
+                <MenuItem Header="_Ieșire din aplicație" Click="OnExitClick"/>
+            </MenuItem>
+
+            <MenuItem Header="_Administrare">
+                <MenuItem Header="Gestionează _Produse (CRUD)" Click="OnDeschideProduseClick"/>
+                <MenuItem Header="Gestionează _Magazine (CRUD)" Click="OnDeschideMagazineClick"/>
             </MenuItem>
         </Menu>
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <Grid Margin="30">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="500"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Margin="40">
+            <Border Background="White" Padding="25" CornerRadius="8" VerticalAlignment="Top">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" Direction="270" ShadowDepth="2" Opacity="0.2" BlurRadius="5"/>
+                </Border.Effect>
 
-                <StackPanel Grid.Column="1">
+                <StackPanel>
+                    <TextBlock Text="Căutare Rapidă Produse" FontSize="24" FontWeight="Bold" Margin="0,0,0,20" Foreground="#2C3E50" TextAlignment="Center"/>
 
-                    <Border Background="White" Padding="25" CornerRadius="8" Margin="0,0,0,20">
-                        <Border.Effect>
-                            <DropShadowEffect Color="Black" Direction="270" ShadowDepth="2" Opacity="0.2" BlurRadius="5"/>
-                        </Border.Effect>
+                    <Label Content="Introduceți numele produsului pentru căutare:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Grid Margin="0,5,0,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtCautaNume" Grid.Column="0" Margin="0,0,15,0" Height="40" FontSize="16" Padding="10,0" VerticalContentAlignment="Center"/>
 
-                        <StackPanel>
-                            <TextBlock Text="Adăugare Produs Nou" FontSize="20" FontWeight="Bold" Margin="0,0,0,15" Foreground="#2C3E50"/>
+                        <Button x:Name="btnCauta" Content="CAUTĂ" Grid.Column="1" Click="OnCautaClick" Background="#2980B9" Foreground="White" FontWeight="Bold" Height="40">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </Grid>
 
-                            <Label x:Name="lblNume" Content="_Nume Produs:" Target="{Binding ElementName=txtNume}"/>
-                            <TextBox x:Name="txtNume"/>
-                            <TextBlock x:Name="errNume" Text="Nume invalid (max 15 caractere)!" Foreground="Red" FontSize="11" Margin="2,-2,0,10" Visibility="Collapsed"/>
+                    <ListBox x:Name="lstRezultateCautare" Height="220" Padding="5" BorderBrush="#BDC3C7" BorderThickness="1" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#F8F9F9" BorderBrush="#E5E8E8" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                            <Label x:Name="lblCategorie" Content="_Categorie:" Target="{Binding ElementName=cmbCategorie}"/>
-                            <ComboBox x:Name="cmbCategorie"/>
-                            <TextBlock x:Name="errCategorie" Text="Selectați categoria!" Foreground="Red" FontSize="11" Margin="2,-2,0,10" Visibility="Collapsed"/>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Nume}" FontSize="16" FontWeight="Bold" Foreground="#2C3E50"/>
+                                            <TextBlock Text="{Binding Categorie, StringFormat='Categorie: {0}'}" FontSize="13" Foreground="#7F8C8D" Margin="0,2,0,0"/>
+                                            <TextBlock Text="{Binding Etichete, StringFormat='Atribute: {0}'}" FontSize="12" Foreground="#27AE60" Margin="0,5,0,0" FontStyle="Italic"/>
+                                        </StackPanel>
 
-                            <Label Content="Etichete Produs (Opțional):"/>
-                            <WrapPanel Margin="0,5,0,15">
-                                <CheckBox x:Name="chkFaraZahar" Content="Fără Zahăr" Margin="0,0,15,5"/>
-                                <CheckBox x:Name="chkFaraGluten" Content="Fără Gluten" Margin="0,0,15,5"/>
-                                <CheckBox x:Name="chkLocal" Content="Produs Local" Margin="0,0,15,5"/>
-                                <CheckBox x:Name="chkOferta" Content="Ofertă Specială" Margin="0,0,0,5"/>
-                            </WrapPanel>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding Pret, StringFormat='{}{0:F2} Lei'}" FontSize="18" FontWeight="Bold" Foreground="#27AE60"/>
+                                        </StackPanel>
 
-                            <Grid Margin="0,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0">
-                                    <Label x:Name="lblCuloar" Content="_Culoar (1-20):" Target="{Binding ElementName=txtCuloar}"/>
-                                    <TextBox x:Name="txtCuloar"/>
-                                    <TextBlock x:Name="errCuloar" Text="Culoar invalid!" Foreground="Red" FontSize="10" Visibility="Collapsed"/>
-                                </StackPanel>
-                                <StackPanel Grid.Column="2">
-                                    <Label x:Name="lblRaft" Content="_Raft (1-50):" Target="{Binding ElementName=txtRaft}"/>
-                                    <TextBox x:Name="txtRaft"/>
-                                    <TextBlock x:Name="errRaft" Text="Raft invalid!" Foreground="Red" FontSize="10" Visibility="Collapsed"/>
-                                </StackPanel>
-                            </Grid>
+                                        <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                            <TextBlock Text="{Binding NumeMagazin}" FontSize="14" FontWeight="Bold" Foreground="#2980B9" HorizontalAlignment="Right"/>
+                                            <TextBlock Text="{Binding Culoar, StringFormat='Culoar: {0}'}" FontSize="12" Foreground="#34495E" HorizontalAlignment="Right"/>
+                                            <TextBlock Text="{Binding Raft, StringFormat='Raft: {0}'}" FontSize="12" Foreground="#34495E" HorizontalAlignment="Right"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-                            <Label x:Name="lblMagazin" Content="Selectați Magazinul de Proveniență:"/>
-                            <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,5">
-                                <StackPanel x:Name="pnlMagazine" Orientation="Horizontal"/>
-                            </Border>
-                            <TextBlock x:Name="errMagazin" Text="Trebuie să alegeți un magazin!" Foreground="Red" FontSize="11" Margin="2,-2,0,10" Visibility="Collapsed"/>
-
-                            <Button x:Name="btnAdauga" Content="SALVEAZĂ PRODUSUL" Background="#27AE60" Click="OnAdaugaClick"/>
-
-                            <TextBlock x:Name="txtStatus" TextWrapping="Wrap" TextAlignment="Center" FontWeight="SemiBold" Visibility="Collapsed"/>
-                        </StackPanel>
-                    </Border>
-
-                    <Border Background="White" Padding="25" CornerRadius="8" Margin="0,0,0,20">
-                        <Border.Effect>
-                            <DropShadowEffect Color="Black" Direction="270" ShadowDepth="2" Opacity="0.2" BlurRadius="5"/>
-                        </Border.Effect>
-
-                        <StackPanel>
-                            <TextBlock Text="Căutare Produs" FontSize="20" FontWeight="Bold" Margin="0,0,0,15" Foreground="#2C3E50"/>
-
-                            <Label Content="Căutați după numele produsului:"/>
-
-                            <Grid Margin="0,5,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="100"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtCautaNume" Grid.Column="0" Margin="0,0,10,0"/>
-                                <Button x:Name="btnCauta" Content="CAUTĂ" Grid.Column="1" Click="OnCautaClick" Background="#2980B9" Margin="0"/>
-                            </Grid>
-
-                            <ListBox x:Name="lstRezultateCautare" Height="120" Padding="5" />
-
-                            <TextBlock x:Name="txtStatusCautare" Foreground="Red" FontWeight="SemiBold" Margin="0,5,0,0" Visibility="Collapsed" TextAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-
+                    <TextBlock x:Name="txtStatusCautare" Foreground="Red" FontWeight="SemiBold" Margin="0,10,0,0" Visibility="Collapsed" TextAlignment="Center"/>
                 </StackPanel>
-            </Grid>
-        </ScrollViewer>
+            </Border>
+        </Grid>
     </Grid>
 </Window>
